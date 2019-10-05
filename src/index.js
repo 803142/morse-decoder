@@ -40,16 +40,16 @@ const MORSE_TABLE = {
 function decode(expr) {
     const experArr = expr.split('**********');
     const resultArr = experArr.map(word => 
-        word.replace(/11/g,'-')
-        .replace(/10/g,'.')
-        .replace(/0+/g, '*')
-        ).map(word =>
-            word.split('*')
-            .map(letter => MORSE_TABLE[letter])
-            .join('')
-            );
+        word.match(/.{1,10}/g)
+        .map(simbol => simbol.replace(/11/g,'-')
+            .replace(/10/g,'.')
+            .replace(/0+/g, '')
+            )
+        .map(simbol => MORSE_TABLE[simbol])
+        .join('')
+        );
 
-    console.log({resultArr});
+    console.log({expr});
     return resultArr.join(' ')
 }
 
